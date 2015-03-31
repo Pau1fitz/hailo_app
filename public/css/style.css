@@ -2,3 +2,7 @@
   height: 600px;
   width: 800px;
  }
+
+#searchbox.tpl.html{
+  width: 2000px;
+}
