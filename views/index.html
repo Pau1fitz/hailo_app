@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hailo-App</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
   <script src='http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&language=en&v=3.17'></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -12,37 +13,60 @@
   <script src="bower_components/lodash/dist/lodash.compat.js"></script>
   <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
     <script src="js/hailo.js"></script>
+    <script src="js/jqueryhailo.js"></script>
  </head>
- <body ng-controller="mapController">
-
+ <body ng-controller="mapController" ng-init="updateMap(lat, long, zoomIndex)">
+<div id="headercolor">
     <div id ="header">
       <h1 id="logo">PAULO</h1>
     </div>
+    </div>
+
+    <div id="Intro">
+      <h2>This page was built using the following web technologies:</h2>
+      <p>Angular</p>
+      <p>Google Maps API</p>
+      <p>Javascript</p>
+      <p>CSS</p>
+      <p>Hailo API</p>
+      <h3>Please play with the tech below</h3>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+  </div>
+
 
 
   <div id="map_canvas">
 
     <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable='true' options="options" events='map.events'>
-
-  <ui-gmap-search-box template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
-
-      <ui-gmap-marker coords="marker.coords" icon="marker.icon" idkey="1"></ui-gmap-marker>
-
-
-       <ui-gmap-marker ng-repeat="marker in drivers" idkey="2" coords="marker">
-
-     </ui-gmap-marker>
-
+    <ui-gmap-search-box template="searchbox.template" events="map.events"></ui-gmap-search-box>
+    <ui-gmap-marker coords="marker.coords" icon="marker.icon" idkey="1"></ui-gmap-marker>
+    <ui-gmap-marker ng-repeat="marker in drivers" idkey="2" coords="marker">
+    </ui-gmap-marker>
     </ui-gmap-google-map>
 
 
     <script type="text/ng-template" id="searchbox.tpl.html">
     <div id="searchybox">
       <form>
-          <input type="text" placeholder="Search Box" >
+          <input type="text" placeholder="Where Are You?">
       </form>
-      </div>
+    </div>
     </script>
 
+    <footer>
+      <p>Copyright Paul Fitz</p>
+    </footer>
  </body>
 </html>

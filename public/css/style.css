@@ -1,29 +1,75 @@
 .angular-google-map-container {
+  position: relative;
   height: 600px;
-  max-width: 1300px;
+  max-width: 1200px;
+  left: 2.5%;
+ }
+
+ .gm-style{
+  left: 20px;
+ }
+
+ #map_canvas{
+  position: relative;
+  text-align: center;
  }
 
 body{
     margin: 0;
     padding: 0;
+    background-color: #FB0;
 }
 
 #header{
   width:100%;
   background-color: #FB0;
-  height: 60px;
+  height: 70px;
   color: white;
   font-family: sans-serif;
+  position: fixed;
+  bottom: 530px;
+  z-index: 1;
 }
 
 input{
+  position: absolute;
   width: 200px;
   height: 20px;
-  border-radius: 10px;
-  font-family: courier;
+  border-radius: 5px;
+  font-family: sans-serif;
+  top: 20px;
 }
 
 #logo {
-  position: absolute;
+  position: relative;
+  left: 2%;
+  top: 14px;
 }
+
+#Intro{
+  top: 100px;
+  position: relative;
+}
+
+h2{
+  text-align: center;
+  font-family: 'PT Sans Narrow', sans-serif;
+  color: white;
+}
+h3{
+
+  text-align: center;
+  font-family: 'PT Sans Narrow', sans-serif;
+  color: white;
+
+}
+p{
+  text-align: center;
+  font-family: 'PT Sans Narrow', sans-serif;
+  color: white;
+}
+/*
+#Intro{
+  position: absolute;
+}*/
 
