@@ -1,8 +1,29 @@
 .angular-google-map-container {
   height: 600px;
-  width: 800px;
+  max-width: 1300px;
  }
 
-#searchbox.tpl.html{
-  width: 2000px;
+body{
+    margin: 0;
+    padding: 0;
 }
+
+#header{
+  width:100%;
+  background-color: #FB0;
+  height: 60px;
+  color: white;
+  font-family: sans-serif;
+}
+
+input{
+  width: 200px;
+  height: 20px;
+  border-radius: 10px;
+  font-family: courier;
+}
+
+#logo {
+  position: absolute;
+}
+

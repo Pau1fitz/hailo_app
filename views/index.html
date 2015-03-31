@@ -2,9 +2,9 @@
 <html ng-app="angularMapsTutorialApp">
  <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hailo-App</title>
   <link rel="stylesheet" href="/css/style.css">
-  <title>title</title>
-
   <script src='http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&language=en&v=3.17'></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -15,7 +15,11 @@
  </head>
  <body ng-controller="mapController">
 
-  <h1>Angular Google Maps</h1>
+    <div id ="header">
+      <h1 id="logo">PAULO</h1>
+    </div>
+
+
   <div id="map_canvas">
 
     <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable='true' options="options" events='map.events'>
@@ -33,9 +37,11 @@
 
 
     <script type="text/ng-template" id="searchbox.tpl.html">
+    <div id="searchybox">
       <form>
           <input type="text" placeholder="Search Box" >
       </form>
+      </div>
     </script>
 
  </body>
