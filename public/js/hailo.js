@@ -39,7 +39,7 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
             return;
         }
 
-        updateMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), 15 );
+        updateMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), $scope.map.zoom );
 
         // $scope.map = {
 
