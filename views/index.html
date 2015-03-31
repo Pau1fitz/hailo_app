@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="angularMapsTutorialApp">
+ <head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>title</title>
+ </head>
+ <body ng-controller="mapController">
+
+  <h1>Angular Google Maps</h1>
+
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable='true' options="options" events='map.events'>
+
+      <ui-gmap-marker coords="marker.coords" icon="marker.icon" idkey="1"></ui-gmap-marker>
+
+       <ui-gmap-marker ng-repeat="marker in drivers" idkey="2" coords="marker">
+
+     </ui-gmap-marker>
+
+    </ui-gmap-google-map>
+
+ {{map.zoom}}
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+  <script src='http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&language=en&v=3.17'></script>
+  <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+
+
+
+  <script src="js/hailo.js"></script>
+
+
+  <script type="text/javascript">
+
+</script>
+ </body>
+</html>
