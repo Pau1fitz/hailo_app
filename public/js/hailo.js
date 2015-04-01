@@ -9,10 +9,10 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
 
   //API Token
   var KEY = '&api_token=zr47c1qxafu1syNfns8KEmLLtcT9FE5Q9IGS4p6OI1ctyEjQP4mJpnmdiZZMH1YrxgyYm/09rOI2cXIrxdOBkVkxaPCN95OsDMpeENZ3dYEgaQgWAbDKDajr4V5CC2sUAucDrUtNPARMmGv2Cc7d9aDBftGJlSh8enCrIBI/VtC5LhsYFxJXBHr84dPCgV9B4fSwNlLMJYMFsOlSiwDjcA=='
-
   var defaultLat = 51.5085300;
   var defaultLong = -0.1257400;
   $scope.view = 0;
+
 
   //function used to update the map.
   function updateMap(lat, long, zoomIndex){
@@ -29,18 +29,18 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
   function updateMarker(lat, long){
     $scope.marker = {
       coords: {
-            latitude: lat,
-            longitude: long
-        },
-        icon: 'https://www.hailoapp.com/assets/img/barty.svg',
-        options : {
-          animation: google.maps.Animation.DROP
-        }
-
+          latitude: lat,
+          longitude: long
+      },
+      options : {
+        animation: google.maps.Animation.DROP
+      },
+      icon: 'https://www.hailoapp.com/assets/img/barty.svg'
     }
   };
 
-updateMarker(defaultLat, defaultLong);
+  //add the marker to the map
+  updateMarker(defaultLat, defaultLong);
 
   //options for the map. Have turned off the scrollwheel,removed the streetview option and made the zoom-slider smaller
   $scope.options = {
@@ -48,34 +48,33 @@ updateMarker(defaultLat, defaultLong);
     streetViewControl: false,
     zoomControlOptions: {
       style: google.maps.ZoomControlStyle.SMALL
-    },
+    }
   };
 
   //setting up map
-  $scope.map =
-    {
-      center: {
-        latitude:  defaultLat,
-        longitude: defaultLong
-      },
-      zoom: 15,
-        //map events
-      events: {
+  $scope.map = {
+    center: {
+      latitude:  defaultLat,
+      longitude: defaultLong
+    },
+    zoom: 15,
+    //map events
+    events: {
 
-    places_changed: function (searchBox) {
+      places_changed: function (searchBox) {
 
-      var place = searchBox.getPlaces();
+        var place = searchBox.getPlaces();
 
         if (!place || place == 'undefined' || place.length == 0) {
-            console.log('place does not exist');
-            return;
+          console.log('place does not exist');
+          return;
         }
 
         var marker_lat = place[0].geometry.location.lat();
         var marker_lng = place[0].geometry.location.lng();
 
         //API request to find the drivers ETA
-      $http.get('https://api.hailoapp.com/drivers/eta?latitude=' + marker_lat + '&longitude=' +  marker_lng  + KEY)
+        $http.get('https://api.hailoapp.com/drivers/eta?latitude=' + marker_lat + '&longitude=' +  marker_lng  + KEY)
         .success(function(data){
           $scope.ETA = data.etas[0].eta + " min";
           if(data.etas[0].eta > 1) $scope.ETA += "s";
@@ -90,17 +89,19 @@ updateMarker(defaultLat, defaultLong);
         updateMap(marker_lat, marker_lng, $scope.map.zoom );
 
         //DRIVERS NEAR THE MARKER
-            $http.get('https://api.hailoapp.com/drivers/near?latitude=' + marker_lat + '&longitude=' + marker_lng  + KEY)
-          .success(function(data){
-            for (var i = 0; i < data.drivers.length; i++) {
-              $scope.drivers.push(data.drivers[i]);
-            };
+        $http.get('https://api.hailoapp.com/drivers/near?latitude=' + marker_lat + '&longitude=' + marker_lng  + KEY)
+        .success(function(data){
+          for (var i = 0; i < data.drivers.length; i++) {
+            $scope.drivers.push(data.drivers[i]);
+          };
         });
-
-
-    }
-
       }
     }
-      $scope.searchbox = { template: 'searchbox.tpl.html', events: $scope.map.events, position: 'TOP_LEFT' };
+  }
+  //searchbox
+  $scope.searchbox = {
+    template: 'searchbox.tpl.html',
+    events: $scope.map.events,
+    position: 'TOP_LEFT'
+  };
 });
