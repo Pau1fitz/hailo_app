@@ -67,6 +67,22 @@ li{
   top: 150px;
 }
 
+#exist_false{
+  position: absolute;
+  font-family: "HelveticaNeue-CondensedBold";
+  text-align: center;
+  background-color: red;
+  font-size: 20px;
+  border-radius: 50%;
+  opacity: 0.9;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+  margin-left: 90%;
+  top: 150px;
+}
+
+
 p{
   text-align: center;
   font-family: "HelveticaNeue-CondensedBold";

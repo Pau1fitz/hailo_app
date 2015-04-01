@@ -11,6 +11,7 @@
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/lodash/dist/lodash.compat.js"></script>
   <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+  <script type="text/javascript" src="bower_components/angular-mocks/angular-mocks.js"></script>
   <script src="js/hailo.js"></script>
 </head>
 
@@ -21,7 +22,7 @@
     <nav>
       <ul>
         <li>DRIVERS</li>
-        <li>CARS</li>
+        <li>DOWNLOAD</li>
         <li>GITHUB</li>
       </ul>
     </nav>
@@ -29,6 +30,9 @@
 
   <div ng-show='view == 1' id="arrival_time">
    <p>ETA is:</br> {{ETA}}</p>
+  </div>
+  <div ng-show='view ==2' id="exist_false">
+    <p>No Such Location</p>
   </div>
 
   <div id="map_canvas">
@@ -41,8 +45,8 @@
   </div>
 
     <script type="text/ng-template" id="searchbox.tpl.html">
-      <form>
-          <input type="text" placeholder="ENTER LOCATION">
+      <form ng-model="paul">
+          <input type="text" placeholder="ENTER LOCATION" id="searcher">
       </form>
     </script>
   </body>

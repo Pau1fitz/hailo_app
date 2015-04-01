@@ -1,4 +1,5 @@
-'use strict';
+"use strict";
+/*jshint globalstrict: true*/
 // Defines that JavaScript code should be executed strict mode
 
 var app = angular.module('hailoApp',['uiGmapgoogle-maps']);
@@ -8,7 +9,7 @@ var app = angular.module('hailoApp',['uiGmapgoogle-maps']);
 app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
 
   //API Token
-  var KEY = '&api_token=zr47c1qxafu1syNfns8KEmLLtcT9FE5Q9IGS4p6OI1ctyEjQP4mJpnmdiZZMH1YrxgyYm/09rOI2cXIrxdOBkVkxaPCN95OsDMpeENZ3dYEgaQgWAbDKDajr4V5CC2sUAucDrUtNPARMmGv2Cc7d9aDBftGJlSh8enCrIBI/VtC5LhsYFxJXBHr84dPCgV9B4fSwNlLMJYMFsOlSiwDjcA=='
+  var KEY = '&api_token=zr47c1qxafu1syNfns8KEmLLtcT9FE5Q9IGS4p6OI1ctyEjQP4mJpnmdiZZMH1YrxgyYm/09rOI2cXIrxdOBkVkxaPCN95OsDMpeENZ3dYEgaQgWAbDKDajr4V5CC2sUAucDrUtNPARMmGv2Cc7d9aDBftGJlSh8enCrIBI/VtC5LhsYFxJXBHr84dPCgV9B4fSwNlLMJYMFsOlSiwDjcA==';
   var defaultLat = 51.5085300;
   var defaultLong = -0.1257400;
   $scope.view = 0;
@@ -22,8 +23,8 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
         longitude: long
       },
       zoom: zoomIndex
-    }
-  };
+    };
+  }
 
   //function used to update the marker.
   function updateMarker(lat, long){
@@ -36,8 +37,8 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
         animation: google.maps.Animation.DROP
       },
       icon: 'https://www.hailoapp.com/assets/img/barty.svg'
-    }
-  };
+    };
+  }
 
   //add the marker to the map
   updateMarker(defaultLat, defaultLong);
@@ -65,8 +66,8 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
 
         var place = searchBox.getPlaces();
 
-        if (!place || place == 'undefined' || place.length == 0) {
-          console.log('place does not exist');
+        if (!place || place == 'undefined' || place.length === 0) {
+          $scope.view = 2;
           return;
         }
 
@@ -93,11 +94,11 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
         .success(function(data){
           for (var i = 0; i < data.drivers.length; i++) {
             $scope.drivers.push(data.drivers[i]);
-          };
+          }
         });
       }
     }
-  }
+  };
   //searchbox
   $scope.searchbox = {
     template: 'searchbox.tpl.html',
