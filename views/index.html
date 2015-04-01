@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="angularMapsTutorialApp">
- <head>
+<html ng-app="hailoApp">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="https://lh4.ggpht.com/KBO82W8HKo92vXFZBmlZCegmWWMjOr55SWBa3VcUiqwqhZLlsvEE4kWlFwQM9yHNZSc=w300" />
   <title>Hailo-App</title>
   <link rel="stylesheet" href="/css/style.css">
-  <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <script src='http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&language=en&v=3.17'></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -16,9 +13,9 @@
   <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
   <script src="js/hailo.js"></script>
   <script src="js/jqueryhailo.js"></script>
- </head>
+</head>
 
- <body ng-controller="mapController">
+  <body ng-controller="mapController">
 
     <header>
       <div id="logo"></div>
@@ -37,7 +34,7 @@
 
   <div id="map_canvas">
     <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable='true' options="options" events='map.events'>
-    <ui-gmap-marker coords="marker.coords" icon="marker.icon" idkey="1" id="user"></ui-gmap-marker>
+    <ui-gmap-marker coords="marker.coords" icon="marker.icon" idkey="1" id="user" options='marker.options'></ui-gmap-marker>
     <ui-gmap-marker ng-repeat="marker in drivers" idkey="2" coords="marker" id="taxi">
     </ui-gmap-marker>
     <ui-gmap-search-box template="searchbox.template" events="map.events" position="searchbox.position"></ui-gmap-search-box>
@@ -49,5 +46,5 @@
           <input type="text" placeholder="ENTER LOCATION">
       </form>
     </script>
- </body>
+  </body>
 </html>

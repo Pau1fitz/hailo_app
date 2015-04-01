@@ -1,7 +1,7 @@
 'use strict';
 // Defines that JavaScript code should be executed strict mode
 
-var app = angular.module('angularMapsTutorialApp',['uiGmapgoogle-maps']);
+var app = angular.module('hailoApp',['uiGmapgoogle-maps']);
 //defines the Angular app to be used in view
 //ui googlemap dependency injected here to enable maps
 
@@ -24,19 +24,25 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
     }
   };
 
+  //sets up marker when map is first created
   $scope.marker = {
         coords: {
             latitude: 51.5085300,
             longitude: -0.1257400
         },
         icon: 'https://www.hailoapp.com/assets/img/barty.svg',
-        // animation: new window.google.maps.Animation.BOUNCE;
-    }
+        options : {
+          animation: google.maps.Animation.DROP
+        }
+  };
 
+  //options for the map. Have turned off the scrollwheel,removed the streetview option and made the zoom small
   $scope.options =
   {scrollwheel: false,
-    streetViewControl: false
-    // zoomControl: false
+    streetViewControl: false,
+    zoomControlOptions: {
+      style: google.maps.ZoomControlStyle.SMALL
+    },
   };
 
     $scope.map =
@@ -45,6 +51,7 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
           latitude:  51.5085300,
           longitude: -0.1257400
         },
+
         zoom: 15,
         events: {
 
@@ -97,7 +104,7 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
                 longitude: place[0].geometry.location.lng()
             },
             icon: 'https://www.hailoapp.com/assets/img/barty.svg',
-            animation: google.maps.Animation.BOUNCE
+              options: {animation: google.maps.Animation.DROP}
         };
     }
         //   click: function (map, eventName, args) {
