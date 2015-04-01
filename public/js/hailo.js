@@ -12,10 +12,9 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
 
   var defaultLat = 51.5085300;
   var defaultLong = -0.1257400;
-  var ETA;
   $scope.view = 0;
 
-  //function used to update the map after API call.
+  //function used to update the map.
   function updateMap(lat, long, zoomIndex){
     $scope.map = {
       center: {
@@ -26,17 +25,22 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
     }
   };
 
-  //sets up marker when map is first created
-  $scope.marker = {
-        coords: {
-            latitude: defaultLat,
-            longitude: defaultLong
+  //function used to update the marker.
+  function updateMarker(lat, long){
+    $scope.marker = {
+      coords: {
+            latitude: lat,
+            longitude: long
         },
         icon: 'https://www.hailoapp.com/assets/img/barty.svg',
         options : {
-          animation: google.maps.Animation.BOUNCE
+          animation: google.maps.Animation.DROP
         }
+
+    }
   };
+
+updateMarker(defaultLat, defaultLong);
 
   //options for the map. Have turned off the scrollwheel,removed the streetview option and made the zoom-slider smaller
   $scope.options = {
@@ -54,24 +58,27 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
         latitude:  defaultLat,
         longitude: defaultLong
       },
-        zoom: 15,
+      zoom: 15,
         //map events
-        events: {
+      events: {
 
-    places_changed: function (searchBox, map, eventName, args) {
+    places_changed: function (searchBox) {
 
       var place = searchBox.getPlaces();
 
         if (!place || place == 'undefined' || place.length == 0) {
-            console.log('no such place');
+            console.log('place does not exist');
             return;
         }
 
+        var marker_lat = place[0].geometry.location.lat();
+        var marker_lng = place[0].geometry.location.lng();
+
         //API request to find the drivers ETA
-      $http.get('https://api.hailoapp.com/drivers/eta?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + KEY)
+      $http.get('https://api.hailoapp.com/drivers/eta?latitude=' + marker_lat + '&longitude=' +  marker_lng  + KEY)
         .success(function(data){
           $scope.ETA = data.etas[0].eta + " min";
-          if(data.etas[0].eta > 1)$scope.ETA += "s";
+          if(data.etas[0].eta > 1) $scope.ETA += "s";
           $scope.view = 1;
         });
 
@@ -79,31 +86,21 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
         //clear the drivers array where the drivers are stored
         $scope.drivers = [];
 
-          $scope.marker =
-            {
-            coords: {
-                latitude: place[0].geometry.location.lat(),
-                longitude: place[0].geometry.location.lng()
-            },
-            icon: 'https://www.hailoapp.com/assets/img/barty.svg',
-              options: {animation: google.maps.Animation.DROP}
-        };
+        updateMarker(marker_lat, marker_lng);
+        updateMap(marker_lat, marker_lng, $scope.map.zoom );
 
-            $http.get('https://api.hailoapp.com/drivers/near?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + KEY)
+        //DRIVERS NEAR THE MARKER
+            $http.get('https://api.hailoapp.com/drivers/near?latitude=' + marker_lat + '&longitude=' + marker_lng  + KEY)
           .success(function(data){
             for (var i = 0; i < data.drivers.length; i++) {
               $scope.drivers.push(data.drivers[i]);
             };
         });
 
-          updateMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), $scope.map.zoom );
-
 
     }
 
       }
     }
-
-
       $scope.searchbox = { template: 'searchbox.tpl.html', events: $scope.map.events, position: 'TOP_LEFT' };
 });
