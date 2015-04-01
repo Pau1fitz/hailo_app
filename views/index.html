@@ -3,9 +3,9 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="https://lh4.ggpht.com/KBO82W8HKo92vXFZBmlZCegmWWMjOr55SWBa3VcUiqwqhZLlsvEE4kWlFwQM9yHNZSc=w300" />
   <title>Hailo-App</title>
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" type="image/png" href="https://lh4.ggpht.com/KBO82W8HKo92vXFZBmlZCegmWWMjOr55SWBa3VcUiqwqhZLlsvEE4kWlFwQM9yHNZSc=w300" />
   <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <script src='http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&language=en&v=3.17'></script>
@@ -17,71 +17,37 @@
   <script src="js/hailo.js"></script>
   <script src="js/jqueryhailo.js"></script>
  </head>
+
  <body ng-controller="mapController">
-<div id="headercolor">
-    <div id ="header">
-      <h1 id="logo">PAULO</h1>
+
+    <header>
+      <div id="logo"></div>
+    <nav>
       <ul>
-        <li>Drivers</li>
-        <li>Cars</li>
-        <li>Jobs</li>
-        <li>Github</li>
+        <li>DRIVERS</li>
+        <li>CARS</li>
+        <li>GITHUB</li>
       </ul>
-    </div>
-    </div>
+    </nav>
+    </header>
 
-    <div id="Intro">
-      <h2>This page was built using the following web technologies:</h2>
-      <p>Angular</p>
-      <p>Google Maps API</p>
-      <p>Javascript</p>
-      <p>CSS</p>
-      <p>Hailo API</p>
-      <h3>Please play with the tech below</h3>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
+  <div ng-show='view == 1' id="arrival_time">
+   <p>ETA is:</br> {{ETA}}</p>
   </div>
-
-  <div id="middle">
-  </div>
-
-  <div ng-show='view == 1' id="ETA">
-   ETA is: {{ETA}}
-  </div>
-
 
   <div id="map_canvas">
-
     <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable='true' options="options" events='map.events'>
-
-    <ui-gmap-marker coords="marker.coords" icon="marker.icon" idkey="1"></ui-gmap-marker>
-    <ui-gmap-marker ng-repeat="marker in drivers" idkey="2" coords="marker">
+    <ui-gmap-marker coords="marker.coords" icon="marker.icon" idkey="1" id="user"></ui-gmap-marker>
+    <ui-gmap-marker ng-repeat="marker in drivers" idkey="2" coords="marker" id="taxi">
     </ui-gmap-marker>
     <ui-gmap-search-box template="searchbox.template" events="map.events" position="searchbox.position"></ui-gmap-search-box>
     </ui-gmap-google-map>
   </div>
 
-    <footer>
-      <p>Copyright Paul Fitz</p>
-    </footer>
-
     <script type="text/ng-template" id="searchbox.tpl.html">
-
       <form>
-          <input type="text" placeholder="Where Are You?">
+          <input type="text" placeholder="ENTER LOCATION">
       </form>
-
     </script>
  </body>
 </html>

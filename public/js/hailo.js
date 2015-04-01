@@ -26,9 +26,11 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
 
   $scope.marker = {
         coords: {
-            latitude: 51.5085300, longitude: -0.1257400
+            latitude: 51.5085300,
+            longitude: -0.1257400
         },
-        icon: 'https://www.hailoapp.com/assets/img/barty.svg'
+        icon: 'https://www.hailoapp.com/assets/img/barty.svg',
+        // animation: new window.google.maps.Animation.BOUNCE;
     }
 
   $scope.options =
@@ -62,11 +64,11 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
             if (data.etas[0].eta === 0) {
               return false
             } else if(data.etas[0].eta == 1){
-              $scope.ETA = data.etas[0].eta + " minute";
+              $scope.ETA = data.etas[0].eta + " min";
               $scope.view = 1;
             }
             else{
-            $scope.ETA = data.etas[0].eta + " minutes";
+            $scope.ETA = data.etas[0].eta + " mins";
             $scope.view = 1;
             }
         });
@@ -94,7 +96,8 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
                 latitude: place[0].geometry.location.lat(),
                 longitude: place[0].geometry.location.lng()
             },
-            icon: 'https://www.hailoapp.com/assets/img/barty.svg'
+            icon: 'https://www.hailoapp.com/assets/img/barty.svg',
+            animation: google.maps.Animation.BOUNCE
         };
     }
         //   click: function (map, eventName, args) {
