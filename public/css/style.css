@@ -14,6 +14,17 @@
   text-align: center;
  }
 
+ li{
+  display: inline-block;
+  padding-left: 100px;
+  text-align: center;
+  position: relative;
+  bottom: 40px;
+  left: 25%;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 20px;
+ }
+
 body{
     margin: 0;
     padding: 0;
@@ -27,7 +38,7 @@ body{
   color: white;
   font-family: sans-serif;
   position: fixed;
-  bottom: 530px;
+  bottom: 570px;
   z-index: 1;
 }
 
@@ -36,11 +47,16 @@ body{
 }
 
 input{
-  position: relative;
-  width: 200px;
-  height: 20px;
-  border-radius: 5px;
-  font-family: 'PT Sans Narrow', sans-serif;
+ background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+         border-color: silver;
+
 }
 
 #logo {
@@ -70,9 +86,6 @@ p{
   text-align: center;
   font-family: 'PT Sans Narrow', sans-serif;
   color: white;
+  font-size: 18px;
 }
-/*
-#Intro{
-  position: absolute;
-}*/
 

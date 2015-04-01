@@ -7,9 +7,11 @@ var app = angular.module('angularMapsTutorialApp',['uiGmapgoogle-maps']);
 
 app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
 
-  var key = '&api_token=zr47c1qxafu1syNfns8KEmLLtcT9FE5Q9IGS4p6OI1ctyEjQP4mJpnmdiZZMH1YrxgyYm/09rOI2cXIrxdOBkVkxaPCN95OsDMpeENZ3dYEgaQgWAbDKDajr4V5CC2sUAucDrUtNPARMmGv2Cc7d9aDBftGJlSh8enCrIBI/VtC5LhsYFxJXBHr84dPCgV9B4fSwNlLMJYMFsOlSiwDjcA=='
-
   //ui googlemap dependency injected here to enable maps
+
+  var KEY = '&api_token=zr47c1qxafu1syNfns8KEmLLtcT9FE5Q9IGS4p6OI1ctyEjQP4mJpnmdiZZMH1YrxgyYm/09rOI2cXIrxdOBkVkxaPCN95OsDMpeENZ3dYEgaQgWAbDKDajr4V5CC2sUAucDrUtNPARMmGv2Cc7d9aDBftGJlSh8enCrIBI/VtC5LhsYFxJXBHr84dPCgV9B4fSwNlLMJYMFsOlSiwDjcA=='
+  //API Token
+  var ETA;
 
   function updateMap(lat, long, zoomIndex){
     $scope.map = {
@@ -21,10 +23,12 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
     }
   };
 
+  //function used to update the map after API call.
+
   $scope.options =
   {scrollwheel: false,
-    streetViewControl: false,
-    zoomControl: false
+    streetViewControl: false
+    // zoomControl: false
   };
 
     $scope.map =
@@ -47,6 +51,16 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
 
         updateMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), $scope.map.zoom );
 
+          $http.get('https://api.hailoapp.com/drivers/eta?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + KEY)
+          .success(function(data){
+            // console.log(data.etas[0].eta);
+            if (data.etas[0].eta === 0) {
+              return false
+            } else{
+            $scope.ETA = data.etas[0].eta;
+            }
+        });
+
         // $scope.map = {
 
         //     "center": {
@@ -58,8 +72,8 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
           $scope.drivers = [];
         console.log($scope.marker.coords.latitude)
          $scope.marker.coords.latitude = place[0].geometry.location.lat()
-        $scope.marker.coords.longitude = place[0].geometry.location.lng()
-            $http.get('https://api.hailoapp.com/drivers/near?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + key)
+          $scope.marker.coords.longitude = place[0].geometry.location.lng()
+            $http.get('https://api.hailoapp.com/drivers/near?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + KEY)
           .success(function(data){
             for (var i = 0; i < data.drivers.length; i++) {
               $scope.drivers.push(data.drivers[i]);
@@ -94,5 +108,5 @@ $scope.marker = {
         icon: 'https://www.hailoapp.com/assets/img/barty.svg',
         options: { draggable: true }
     }
-      $scope.searchbox = { template: 'searchbox.tpl.html', events: $scope.map.events, position: 'TOP_CENTER' };
+      $scope.searchbox = { template: 'searchbox.tpl.html', events: $scope.map.events, position: 'TOP_LEFT' };
 });
