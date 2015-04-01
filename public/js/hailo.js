@@ -25,6 +25,13 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
     }
   };
 
+  $scope.marker = {
+        coords: {
+            latitude: 51.5085300, longitude: -0.1257400
+        },
+        icon: 'https://www.hailoapp.com/assets/img/barty.svg'
+    }
+
   $scope.options =
   {scrollwheel: false,
     streetViewControl: false
@@ -105,11 +112,6 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
       }
     }
 
-$scope.marker = {
-        coords: {
-            latitude: 51.5085300, longitude: -0.1257400
-        },
-        icon: 'https://www.hailoapp.com/assets/img/barty.svg'
-    }
+
       $scope.searchbox = { template: 'searchbox.tpl.html', events: $scope.map.events, position: 'TOP_LEFT' };
 });

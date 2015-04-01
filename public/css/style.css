@@ -22,7 +22,7 @@
   bottom: 40px;
   left: 25%;
   font-family: 'PT Sans Narrow', sans-serif;
-  font-size: 20px;
+  font-size: 16pxpx;
  }
 
 body{
@@ -40,6 +40,7 @@ body{
   position: fixed;
   bottom: 570px;
   z-index: 1;
+
 }
 
 #ETA{
@@ -47,9 +48,20 @@ body{
   text-align: center;
 }
 
+#middle{
+  background-color: white;
+  height: 500px;
+}
+
+#map_canvas{
+  background-color: white;
+}
+
 #searchy_box{
   position: relative;
 }
+
+
 
 input{
  background-color: #fff;
@@ -66,7 +78,7 @@ input{
 
 #logo {
   position: relative;
-  left: 2%;
+  left: 10%;
   top: 14px;
 }
 

@@ -3,6 +3,7 @@ $(document).ready(function(){
   $( window ).scroll(function() {
   $( "#header" ).css( 'height', '50px');
   $( "#header" ).css( 'background-color', 'white');
+  $( "#header" ).css( 'box-shadow', '2px 2px 2px silver');
   $("#logo").css('font-size', '20px');
   $("#logo").css('color', 'black');
   $('li').css('color', 'black');
