@@ -24,4 +24,10 @@ describe('hailoApp homepage', function() {
     expect(browser.isElementPresent(by.id('exist_false'))).toBe(true);
   });
 
+  it('can do this', function(){
+    var searcher = element(by.tagName("ui-gmap-search-box"));
+    searcher.sendKeys("Location");
+    searcher.submit();
+  });
+
 });
