@@ -4,15 +4,17 @@
 
 var app = angular.module('angularMapsTutorialApp',['uiGmapgoogle-maps']);
 //defines the Angular app to be used in view
+//ui googlemap dependency injected here to enable maps
 
 app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
 
-  //ui googlemap dependency injected here to enable maps
-
-  var KEY = '&api_token=zr47c1qxafu1syNfns8KEmLLtcT9FE5Q9IGS4p6OI1ctyEjQP4mJpnmdiZZMH1YrxgyYm/09rOI2cXIrxdOBkVkxaPCN95OsDMpeENZ3dYEgaQgWAbDKDajr4V5CC2sUAucDrUtNPARMmGv2Cc7d9aDBftGJlSh8enCrIBI/VtC5LhsYFxJXBHr84dPCgV9B4fSwNlLMJYMFsOlSiwDjcA=='
   //API Token
-  var ETA;
+  var KEY = '&api_token=zr47c1qxafu1syNfns8KEmLLtcT9FE5Q9IGS4p6OI1ctyEjQP4mJpnmdiZZMH1YrxgyYm/09rOI2cXIrxdOBkVkxaPCN95OsDMpeENZ3dYEgaQgWAbDKDajr4V5CC2sUAucDrUtNPARMmGv2Cc7d9aDBftGJlSh8enCrIBI/VtC5LhsYFxJXBHr84dPCgV9B4fSwNlLMJYMFsOlSiwDjcA=='
 
+  var ETA;
+  $scope.view = 0;
+
+  //function used to update the map after API call.
   function updateMap(lat, long, zoomIndex){
     $scope.map = {
       center: {
@@ -22,8 +24,6 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
       zoom: zoomIndex
     }
   };
-
-  //function used to update the map after API call.
 
   $scope.options =
   {scrollwheel: false,
@@ -40,12 +40,12 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
         zoom: 15,
         events: {
 
-           places_changed: function (searchBox, map, eventName, args) {
+        places_changed: function (searchBox, map, eventName, args) {
 
         var place = searchBox.getPlaces();
 
         if (!place || place == 'undefined' || place.length == 0) {
-            console.log('no place data');
+            console.log('no such place');
             return;
         }
 
@@ -53,11 +53,15 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
 
           $http.get('https://api.hailoapp.com/drivers/eta?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + KEY)
           .success(function(data){
-            // console.log(data.etas[0].eta);
             if (data.etas[0].eta === 0) {
               return false
-            } else{
-            $scope.ETA = data.etas[0].eta;
+            } else if(data.etas[0].eta == 1){
+              $scope.ETA = data.etas[0].eta + " minute";
+              $scope.view = 1;
+            }
+            else{
+            $scope.ETA = data.etas[0].eta + " minutes";
+            $scope.view = 1;
             }
         });
 
@@ -69,7 +73,7 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
         //     },
         //     "zoom": 15
         // };
-          $scope.drivers = [];
+        $scope.drivers = [];
         console.log($scope.marker.coords.latitude)
          $scope.marker.coords.latitude = place[0].geometry.location.lat()
           $scope.marker.coords.longitude = place[0].geometry.location.lng()
@@ -86,18 +90,18 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
             },
             icon: 'https://www.hailoapp.com/assets/img/barty.svg'
         };
-    },
-          click: function (map, eventName, args) {
-            $scope.drivers = [];
-            $scope.marker.coords.latitude = args[0].latLng.lat();
-            $scope.marker.coords.longitude = args[0].latLng.lng();
-             $http.get('https://api.hailoapp.com/drivers/near?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + key)
-            .success(function(data){
-              for (var i = 0; i < data.drivers.length; i++) {
-              $scope.drivers.push(data.drivers[i]);
-            };
-          });
-        }
+    }
+        //   click: function (map, eventName, args) {
+        //     $scope.drivers = [];
+        //     $scope.marker.coords.latitude = args[0].latLng.lat();
+        //     $scope.marker.coords.longitude = args[0].latLng.lng();
+        //      $http.get('https://api.hailoapp.com/drivers/near?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + key)
+        //     .success(function(data){
+        //       for (var i = 0; i < data.drivers.length; i++) {
+        //       $scope.drivers.push(data.drivers[i]);
+        //     };
+        //   });
+        // }
       }
     }
 
@@ -105,8 +109,7 @@ $scope.marker = {
         coords: {
             latitude: 51.5085300, longitude: -0.1257400
         },
-        icon: 'https://www.hailoapp.com/assets/img/barty.svg',
-        options: { draggable: true }
+        icon: 'https://www.hailoapp.com/assets/img/barty.svg'
     }
       $scope.searchbox = { template: 'searchbox.tpl.html', events: $scope.map.events, position: 'TOP_LEFT' };
 });

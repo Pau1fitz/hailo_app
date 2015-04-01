@@ -42,6 +42,11 @@ body{
   z-index: 1;
 }
 
+#ETA{
+  font-family: 'PT Sans Narrow', sans-serif;
+  text-align: center;
+}
+
 #searchy_box{
   position: relative;
 }
