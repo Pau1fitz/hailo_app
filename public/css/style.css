@@ -46,11 +46,17 @@ body{
 #ETA{
   font-family: 'PT Sans Narrow', sans-serif;
   text-align: center;
+  background-color: white;
+  font-size: 20px;
 }
 
 #middle{
   background-color: white;
   height: 500px;
+  background-image: url('https://www.hailoapp.com/assets/img/barty.svg');
+    background-position: center;
+    background-size: 250px 175px;
+  background-repeat: no-repeat;
 }
 
 #map_canvas{

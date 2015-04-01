@@ -1,5 +1,4 @@
 'use strict';
-
 // Defines that JavaScript code should be executed strict mode
 
 var app = angular.module('angularMapsTutorialApp',['uiGmapgoogle-maps']);
