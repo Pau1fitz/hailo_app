@@ -1,14 +1,25 @@
 {
   "name": "hailo_test",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "express": "^4.12.3"
-  }
+  },
+  "dependencies": {
+    "express": "^4.12.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pau1fitz/maps.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Pau1fitz/maps/issues"
+  },
+  "homepage": "https://github.com/Pau1fitz/maps"
 }
