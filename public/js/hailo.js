@@ -10,6 +10,8 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
   //API Token
   var KEY = '&api_token=zr47c1qxafu1syNfns8KEmLLtcT9FE5Q9IGS4p6OI1ctyEjQP4mJpnmdiZZMH1YrxgyYm/09rOI2cXIrxdOBkVkxaPCN95OsDMpeENZ3dYEgaQgWAbDKDajr4V5CC2sUAucDrUtNPARMmGv2Cc7d9aDBftGJlSh8enCrIBI/VtC5LhsYFxJXBHr84dPCgV9B4fSwNlLMJYMFsOlSiwDjcA=='
 
+  var defaultLat = 51.5085300;
+  var defaultLong = -0.1257400;
   var ETA;
   $scope.view = 0;
 
@@ -27,12 +29,12 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
   //sets up marker when map is first created
   $scope.marker = {
         coords: {
-            latitude: 51.5085300,
-            longitude: -0.1257400
+            latitude: defaultLat,
+            longitude: defaultLong
         },
         icon: 'https://www.hailoapp.com/assets/img/barty.svg',
         options : {
-          animation: google.maps.Animation.DROP
+          animation: google.maps.Animation.BOUNCE
         }
   };
 
@@ -45,52 +47,40 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
     },
   };
 
-    $scope.map =
-      {
-        center: {
-          latitude:  51.5085300,
-          longitude: -0.1257400
-        },
-
+  //setting up map
+  $scope.map =
+    {
+      center: {
+        latitude:  defaultLat,
+        longitude: defaultLong
+      },
         zoom: 15,
+        //map events
         events: {
 
-        places_changed: function (searchBox, map, eventName, args) {
+    places_changed: function (searchBox, map, eventName, args) {
 
-        var place = searchBox.getPlaces();
+      var place = searchBox.getPlaces();
 
         if (!place || place == 'undefined' || place.length == 0) {
             console.log('no such place');
             return;
         }
 
-        updateMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), $scope.map.zoom );
-
-          $http.get('https://api.hailoapp.com/drivers/eta?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + KEY)
-          .success(function(data){
-            if (data.etas[0].eta === 0) {
-              return false
-            } else if(data.etas[0].eta == 1){
-              $scope.ETA = data.etas[0].eta + " min";
-              $scope.view = 1;
-            }
-            else{
-            $scope.ETA = data.etas[0].eta + " mins";
-            $scope.view = 1;
-            }
+        //API request to find the drivers ETA
+      $http.get('https://api.hailoapp.com/drivers/eta?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + KEY)
+        .success(function(data){
+          $scope.ETA = data.etas[0].eta + " min";
+          if(data.etas[0].eta > 1)$scope.ETA += "s";
+          $scope.view = 1;
         });
 
+
+        //clear the drivers array where the drivers are stored
         $scope.drivers = [];
-        console.log($scope.marker.coords.latitude)
-         $scope.marker.coords.latitude = place[0].geometry.location.lat()
-          $scope.marker.coords.longitude = place[0].geometry.location.lng()
-            $http.get('https://api.hailoapp.com/drivers/near?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + KEY)
-          .success(function(data){
-            for (var i = 0; i < data.drivers.length; i++) {
-              $scope.drivers.push(data.drivers[i]);
-            };
-        });
-        $scope.marker = {
+
+          $scope.marker =
+            {
             coords: {
                 latitude: place[0].geometry.location.lat(),
                 longitude: place[0].geometry.location.lng()
@@ -98,6 +88,17 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
             icon: 'https://www.hailoapp.com/assets/img/barty.svg',
               options: {animation: google.maps.Animation.DROP}
         };
+
+            $http.get('https://api.hailoapp.com/drivers/near?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + KEY)
+          .success(function(data){
+            for (var i = 0; i < data.drivers.length; i++) {
+              $scope.drivers.push(data.drivers[i]);
+            };
+        });
+
+          updateMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), $scope.map.zoom );
+
+
     }
 
       }
