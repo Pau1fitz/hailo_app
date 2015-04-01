@@ -21,6 +21,12 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
     }
   };
 
+  $scope.options =
+  {scrollwheel: false,
+    streetViewControl: false,
+    zoomControl: false
+  };
+
     $scope.map =
       {
         center: {
@@ -88,5 +94,5 @@ $scope.marker = {
         icon: 'https://www.hailoapp.com/assets/img/barty.svg',
         options: { draggable: true }
     }
-      $scope.searchbox = { template: 'searchbox.tpl.html', events: $scope.map.events };
+      $scope.searchbox = { template: 'searchbox.tpl.html', events: $scope.map.events, position: 'TOP_CENTER' };
 });

@@ -31,13 +31,16 @@ body{
   z-index: 1;
 }
 
+#searchy_box{
+  position: relative;
+}
+
 input{
   position: relative;
   width: 200px;
   height: 20px;
   border-radius: 5px;
-  font-family: sans-serif;
-
+  font-family: 'PT Sans Narrow', sans-serif;
 }
 
 #logo {

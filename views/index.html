@@ -50,19 +50,20 @@
   <div id="map_canvas">
 
     <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable='true' options="options" events='map.events'>
-    <ui-gmap-search-box template="searchbox.template" events="map.events"></ui-gmap-search-box>
+
     <ui-gmap-marker coords="marker.coords" icon="marker.icon" idkey="1"></ui-gmap-marker>
     <ui-gmap-marker ng-repeat="marker in drivers" idkey="2" coords="marker">
     </ui-gmap-marker>
+    <ui-gmap-search-box template="searchbox.template" events="map.events" position="searchbox.position"></ui-gmap-search-box>
     </ui-gmap-google-map>
 
 
     <script type="text/ng-template" id="searchbox.tpl.html">
-    <div id="searchybox">
+
       <form>
           <input type="text" placeholder="Where Are You?">
       </form>
-    </div>
+
     </script>
 
     <footer>
