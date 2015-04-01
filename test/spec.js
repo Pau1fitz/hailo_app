@@ -24,10 +24,15 @@ describe('hailoApp homepage', function() {
     expect(browser.isElementPresent(by.id('exist_false'))).toBe(true);
   });
 
-  it('can do this', function(){
-    var searcher = element(by.tagName("ui-gmap-search-box"));
-    searcher.sendKeys("Location");
-    searcher.submit();
+  // it('can do this', function(){
+  //   var searcher = element(by.css("input[placeholder='ENTER LOCATION']"));
+  //   searcher.sendKeys("Location");
+  //   searcher.submit();
+  // });
+
+  it('has a link to download the app', function(){
+    element(by.id('download')).click();
+    expect(browser.getCurrentUrl()).toMatch("https://itunes.apple.com/gb/app/hailo/id468420446?mt=8")
   });
 
 });
