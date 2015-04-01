@@ -36,9 +36,9 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
         }
   };
 
-  //options for the map. Have turned off the scrollwheel,removed the streetview option and made the zoom small
-  $scope.options =
-  {scrollwheel: false,
+  //options for the map. Have turned off the scrollwheel,removed the streetview option and made the zoom-slider smaller
+  $scope.options = {
+    scrollwheel: false,
     streetViewControl: false,
     zoomControlOptions: {
       style: google.maps.ZoomControlStyle.SMALL
@@ -80,14 +80,6 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
             }
         });
 
-        // $scope.map = {
-
-        //     "center": {
-        //         "latitude": place[0].geometry.location.lat(),
-        //         "longitude": place[0].geometry.location.lng()
-        //     },
-        //     "zoom": 15
-        // };
         $scope.drivers = [];
         console.log($scope.marker.coords.latitude)
          $scope.marker.coords.latitude = place[0].geometry.location.lat()
@@ -107,17 +99,7 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
               options: {animation: google.maps.Animation.DROP}
         };
     }
-        //   click: function (map, eventName, args) {
-        //     $scope.drivers = [];
-        //     $scope.marker.coords.latitude = args[0].latLng.lat();
-        //     $scope.marker.coords.longitude = args[0].latLng.lng();
-        //      $http.get('https://api.hailoapp.com/drivers/near?latitude=' + $scope.marker.coords.latitude + '&longitude=' + $scope.marker.coords.longitude  + key)
-        //     .success(function(data){
-        //       for (var i = 0; i < data.drivers.length; i++) {
-        //       $scope.drivers.push(data.drivers[i]);
-        //     };
-        //   });
-        // }
+
       }
     }
 
