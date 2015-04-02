@@ -37,15 +37,14 @@ ul{
   list-style-type: none;
   margin: 0;
   padding: 0;
-  top: 50px;
+  top: 60px;
   position: relative;
 }
 
 li{
   position: relative;
   display: inline;
-  padding-left: 10%;
-  top: 6%;
+  margin: 6%;
   left: 18%;
   font-size: 28px;
   font-family: "HelveticaNeue-CondensedBold";
