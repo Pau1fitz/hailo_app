@@ -9,11 +9,10 @@ var app = angular.module('hailoApp',['uiGmapgoogle-maps']);
 app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
 
   //API Token
-  var KEY = '&api_token=zr47c1qxafu1syNfns8KEmLLtcT9FE5Q9IGS4p6OI1ctyEjQP4mJpnmdiZZMH1YrxgyYm/09rOI2cXIrxdOBkVkxaPCN95OsDMpeENZ3dYEgaQgWAbDKDajr4V5CC2sUAucDrUtNPARMmGv2Cc7d9aDBftGJlSh8enCrIBI/VtC5LhsYFxJXBHr84dPCgV9B4fSwNlLMJYMFsOlSiwDjcA==';
+  var KEY = key();
   var defaultLat = 51.5085300;
   var defaultLong = -0.1257400;
   $scope.view = 0;
-
 
   //function used to update the map
   function updateMap(lat, long, zoomIndex){
@@ -87,17 +86,16 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
           $scope.view = 1;
         });
 
-        //clear the drivers array where the drivers are stored
-        $scope.drivers = [];
-
         //update marker and map
         updateMarker(marker_lat, marker_lng);
         updateMap(marker_lat, marker_lng, $scope.map.zoom );
 
+        //clear the drivers array where the drivers are stored
+        $scope.drivers = [];
+
         //Drivers located near the user
         $http.get('https://api.hailoapp.com/drivers/near?latitude=' + marker_lat + '&longitude=' + marker_lng  + KEY)
         .success(function(data){
-
           for (var i = 0; i < data.drivers.length; i++) {
             $scope.drivers.push(data.drivers[i]);
           }

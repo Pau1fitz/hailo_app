@@ -24,22 +24,14 @@ describe('hailoApp homepage', function() {
     expect(browser.isElementPresent(by.id('exist_false'))).toBe(true);
   });
 
-  it('has a search box the user can enter text into', function(){
+  it('has a search box where user can enter text', function(){
+    var enter = browser.actions().sendKeys(protractor.Key.ENTER);
     var searcher = element(by.css("input[placeholder='ENTER LOCATION']"));
     var EC = protractor.ExpectedConditions;
     browser.wait(EC.presenceOf(searcher), 1000)
     searcher.sendKeys("London");
-    expect(searcher.getText()).toEqual("")
-  });
-
-  it('has a link to download the app', function(){
-    expect(element(by.id('driver')).getAttribute('href')).toMatch('http://localhost.hailoweb.com:3000/');
-    element(by.id('drivers')).click();
-    browser.wait(function() {
-    return browser.driver.getCurrentUrl().then(function(url) {
-      return url.match('http://localhost.hailoweb.com:3000/');
-    });
-  }, 50, 'page should navigate to download');
+    enter.perform();
+    expect(searcher.getText()).toEqual("");
   });
 
 });
