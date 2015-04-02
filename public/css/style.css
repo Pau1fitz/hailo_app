@@ -107,6 +107,10 @@ input{
   border-color: white;
 }
 
+#taxi{
+ background-color: green;
+}
+
 footer{
   position: absolute;
   width: 100%;

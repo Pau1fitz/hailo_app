@@ -12,7 +12,6 @@
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/lodash/dist/lodash.compat.js"></script>
   <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
-  <script type="text/javascript" src="bower_components/angular-mocks/angular-mocks.js"></script>
    <script src="js/secret_key.js"></script>
   <script src="js/hailo.js"></script>
   <script src="js/jquery_hailo.js"></script>
@@ -41,7 +40,7 @@
   <div id="map_canvas">
     <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable='true' options="options" events='map.events'>
     <ui-gmap-marker coords="marker.coords" icon="marker.icon" idkey="1" id="user" options='marker.options'></ui-gmap-marker>
-    <ui-gmap-marker ng-repeat="marker in drivers" idkey="2" coords="marker" id="taxi">
+    <ui-gmap-marker ng-repeat="marker in drivers" idkey="2" coords="marker">
     </ui-gmap-marker>
     <ui-gmap-search-box template="searchbox.template" events="map.events" position="searchbox.position"></ui-gmap-search-box>
     </ui-gmap-google-map>
