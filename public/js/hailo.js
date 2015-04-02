@@ -63,6 +63,8 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
     events: {
 
       places_changed: function (searchBox) {
+          //set the view to zero so no eta shown if taxi not in vacinity
+        $scope.view = 0;
 
         var place = searchBox.getPlaces();
 
@@ -92,6 +94,7 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
         //DRIVERS NEAR THE MARKER
         $http.get('https://api.hailoapp.com/drivers/near?latitude=' + marker_lat + '&longitude=' + marker_lng  + KEY)
         .success(function(data){
+
           for (var i = 0; i < data.drivers.length; i++) {
             $scope.drivers.push(data.drivers[i]);
           }

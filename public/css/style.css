@@ -95,16 +95,9 @@ p{
   font-weight: bold;
 }
 
-
 #map_canvas{
   background-color: white;
 }
-
-#searchy_box{
-  position: relative;
-}
-
-
 
 input{
  background-color: #fff;
@@ -114,6 +107,13 @@ input{
   padding: 0 11px 0 13px;
   width: 400px;
   border-color: white;
+}
+
+footer{
+  position: absolute;
+  width: 100%;
+  background-color: #FB0;
+  opacity: 0.7;
 }
 
 
