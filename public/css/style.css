@@ -4,7 +4,6 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: white;
 }
 
 .angular-google-map-container {
@@ -14,17 +13,17 @@ body{
   padding-bottom: 100px;
  }
 
- #map_canvas{
+#map_canvas{
   position: relative;
   text-align: center;
  }
 
- header{
+header{
   height: 120px;
   background-color: #FB0;
  }
 
- #logo {
+#logo {
   position: absolute;
   background-image: url("PaulO.svg");
   background-size: 160px 120px;
