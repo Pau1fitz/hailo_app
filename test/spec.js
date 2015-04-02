@@ -33,15 +33,13 @@ describe('hailoApp homepage', function() {
   });
 
   it('has a link to download the app', function(){
-    expect(element(by.id('download')).getAttribute('href')).toMatch('http://localhost.hailoweb.com:3000/');
-    element(by.id('download_app')).click();
+    expect(element(by.id('driver')).getAttribute('href')).toMatch('http://localhost.hailoweb.com:3000/');
+    element(by.id('drivers')).click();
     browser.wait(function() {
     return browser.driver.getCurrentUrl().then(function(url) {
       return url.match('http://localhost.hailoweb.com:3000/');
     });
   }, 50, 'page should navigate to download');
   });
-
-
 
 });
