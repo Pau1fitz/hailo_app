@@ -83,6 +83,9 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
           $scope.ETA = data.etas[0].eta + " min";
           if(data.etas[0].eta > 1) $scope.ETA += "s";
           $scope.view = 1;
+        }).error(function(data, status) {
+          $scope.data = data || "Request failed";
+          $scope.status = status;
         });
 
         //update marker and map
@@ -93,15 +96,20 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
         $scope.drivers = [];
 
         //Drivers located near the user
-        $http.get('https://api.hailoapp.com/drivers/near?latitude=' + marker_lat + '&longitude=' + marker_lng  + KEY)
-        .success(function(data){
-          for (var i = 0; i < data.drivers.length; i++) {
+        $http.get('https://api.hailoapp.com/drivers/near?latitude=' + marker_lat + '&longitude=' + marker_lng  + KEY).
+        success(function(data, status) {
+         for (var i = 0; i < data.drivers.length; i++) {
             $scope.drivers.push(data.drivers[i]);
           }
+        }).error(function(data, status) {
+          $scope.data = data || "Request failed";
+          $scope.status = status;
         });
       }
     }
   };
+
+
 
   //searchbox configuration
   $scope.searchbox = {
