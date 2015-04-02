@@ -15,7 +15,7 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
   $scope.view = 0;
 
 
-  //function used to update the map.
+  //function used to update the map
   function updateMap(lat, long, zoomIndex){
     $scope.map = {
       center: {
@@ -26,7 +26,7 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
     };
   }
 
-  //function used to update the marker.
+  //function used to update the user/marker
   function updateMarker(lat, long){
     $scope.marker = {
       coords: {
@@ -40,10 +40,11 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
     };
   }
 
-  //add the marker to the map
+  //add the marker to the map when page loads
   updateMarker(defaultLat, defaultLong);
 
-  //options for the map. Have turned off the scrollwheel,removed the streetview option and made the zoom-slider smaller
+
+  //options for the map
   $scope.options = {
     scrollwheel: false,
     streetViewControl: false,
@@ -63,20 +64,22 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
     events: {
 
       places_changed: function (searchBox) {
-          //set the view to zero so no eta shown if taxi not in vacinity
+        //set the view to zero so no ETA displayed if no taxis in vacinity
         $scope.view = 0;
 
         var place = searchBox.getPlaces();
 
+        //displays error if user inputs unknown location
         if (!place || place == 'undefined' || place.length === 0) {
           $scope.view = 2;
           return;
         }
 
+        //long and lat coordinates returned by input
         var marker_lat = place[0].geometry.location.lat();
         var marker_lng = place[0].geometry.location.lng();
 
-        //API request to find the drivers ETA
+        //GET request to find the drivers ETA
         $http.get('https://api.hailoapp.com/drivers/eta?latitude=' + marker_lat + '&longitude=' +  marker_lng  + KEY)
         .success(function(data){
           $scope.ETA = data.etas[0].eta + " min";
@@ -84,14 +87,14 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
           $scope.view = 1;
         });
 
-
         //clear the drivers array where the drivers are stored
         $scope.drivers = [];
 
+        //update marker and map
         updateMarker(marker_lat, marker_lng);
         updateMap(marker_lat, marker_lng, $scope.map.zoom );
 
-        //DRIVERS NEAR THE MARKER
+        //Drivers located near the user
         $http.get('https://api.hailoapp.com/drivers/near?latitude=' + marker_lat + '&longitude=' + marker_lng  + KEY)
         .success(function(data){
 
@@ -102,7 +105,8 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
       }
     }
   };
-  //searchbox
+
+  //searchbox configuration
   $scope.searchbox = {
     template: 'searchbox.tpl.html',
     events: $scope.map.events,

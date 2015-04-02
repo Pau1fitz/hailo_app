@@ -5,7 +5,7 @@ describe('hailoApp homepage', function() {
   });
 
   it('has a title', function() {
-    expect(browser.getTitle()).toEqual('Paulo-App');
+    expect(browser.getTitle()).toEqual('Paulo');
   });
 
   it('displays a PaulO logo', function() {
