@@ -26,7 +26,7 @@ describe('hailoApp homepage', function() {
 
   it('has a search box where user can enter text', function(){
     var searcher = element(by.css("input[placeholder='ENTER LOCATION']"));
-    browser.wait(protractor.ExpectedConditions.presenceOf(searcher), 1000)
+    browser.wait(protractor.ExpectedConditions.presenceOf(searcher), 1000);
     searcher.sendKeys("London");
     browser.actions().sendKeys(protractor.Key.ENTER).perform();
     expect(searcher.getText()).toEqual("");

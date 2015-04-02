@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "express": "^4.12.3",
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.1",
     "grunt-express-server": "^0.4.19",
@@ -23,14 +22,6 @@
   "dependencies": {
     "express": "^4.12.3"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Pau1fitz/maps.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Pau1fitz/maps/issues"
-  },
-  "homepage": "https://github.com/Pau1fitz/maps",
   "directories": {
     "test": "test"
   }

@@ -109,8 +109,6 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
     }
   };
 
-
-
   //searchbox configuration
   $scope.searchbox = {
     template: 'searchbox.tpl.html',
