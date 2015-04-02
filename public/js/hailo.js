@@ -42,7 +42,6 @@ app.controller('mapController', function($scope, $http, uiGmapGoogleMapApi) {
   //add the marker to the map when page loads
   updateMarker(defaultLat, defaultLong);
 
-
   //options for the map
   $scope.options = {
     scrollwheel: false,
